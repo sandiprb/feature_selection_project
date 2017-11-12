@@ -9,4 +9,10 @@ from sklearn.ensemble import RandomForestClassifier
 
 # Your solution code here
 
-
+def rf_rfe(df):
+    X = df[df.columns[:-1]]
+    y = df['SalePrice']
+    forest = RandomForestClassifier()
+    rfe = RFE(forest, X.columns.size / 2)
+    rfe.fit(X, y)
+    return list(X.columns[rfe.support_])
